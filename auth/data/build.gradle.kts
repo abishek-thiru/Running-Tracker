@@ -10,5 +10,4 @@ android {
 dependencies {
     implementation(project(":auth:domain"))
     implementation(project(":core:domain"))
-    implementation(project(":auth:data"))
 }
