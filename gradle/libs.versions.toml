@@ -119,3 +119,23 @@ mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.
 runningTracker-android-application = { id = "runningTracker.android.application", version = "unspecified"}
 runningTracker-android-application-compose = { id = "runningTracker.android.application.compose", version = "unspecified"}
 runningTracker-android-library = { id = "runningTracker.android.library", version = "unspecified"}
+runningTracker-android-library-compose = { id = "runningTracker.android.library.compose", version = "unspecified"}
+runningTracker-android-feature-ui = { id = "runningTracker.android.feature.ui", version = "unspecified"}
+
+
+[bundles]
+compose = [
+    "androidx-activity-compose",
+    "androidx-compose-material3",
+    "androidx-lifecycle-viewmodel-compose",
+    "androidx-compose-ui",
+    "androidx-compose-ui-tooling-preview"
+]
+
+compose-debug = [
+    "androidx-compose-ui-tooling",
+    "androidx-compose-ui-test-manifest"
+]
+
+koin = ["koin-core", "koin-android", "koin-android-workmanager"]
+koin_compose = ["koin-core", "koin-android", "koin-android-workmanager", "koin-androidx-compose"]
