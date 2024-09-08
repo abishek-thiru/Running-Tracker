@@ -117,3 +117,5 @@ mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.
 
 # Convention Plugins
 runningTracker-android-application = { id = "runningTracker.android.application", version = "unspecified"}
+runningTracker-android-application-compose = { id = "runningTracker.android.application.compose", version = "unspecified"}
+runningTracker-android-library = { id = "runningTracker.android.library", version = "unspecified"}
