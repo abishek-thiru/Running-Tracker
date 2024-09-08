@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.runningTracker.android.library)
+    alias(libs.plugins.runningTracker.jvm.ktor)
 }
 
 android {
