@@ -20,6 +20,8 @@ dependencyResolutionManagement {
     }
 }
 
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testclasses"))
+
 rootProject.name = "Running Tracker"
 include(":app")
 include(":auth:data")
