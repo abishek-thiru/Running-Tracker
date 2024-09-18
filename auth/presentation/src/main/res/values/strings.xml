@@ -5,4 +5,16 @@
     <string name="app_description">Track your runs, set goals and achieve fitness milestone with our app.</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account\n</string>
+    <string name="already_have_account">"Already have an account? "</string>
+    <string name="login">Login</string>
+    <string name="example_email">test@example.com</string>
+    <string name="email">Email</string>
+    <string name="must_be_valid_email">Must be a valid Email</string>
+    <string name="password">Password</string>
+    <string name="at_least_x_characters">At least %d characters</string>
+    <string name="at_least_one_number">At least one number</string>
+    <string name="contains_lowercase">Contains lowercase character</string>
+    <string name="contains_uppercase">Contains uppercase character</string>
+    <string name="register">Register</string>
 </resources>
