@@ -56,7 +56,9 @@ class RegisterViewModel(
                 state = state.copy(isPasswordVisible = !state.isPasswordVisible)
             }
 
-            else -> Unit
+            RegisterAction.OnLoginClick -> {
+
+            }
         }
     }
 

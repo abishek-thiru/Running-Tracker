@@ -36,7 +36,6 @@ import com.abi.core.presentation.designsystem.CrossIcon
 import com.abi.core.presentation.designsystem.EmailIcon
 import com.abi.core.presentation.designsystem.Poppins
 import com.abi.core.presentation.designsystem.RunningTrackerDarkRed
-import com.abi.core.presentation.designsystem.RunningTrackerGray
 import com.abi.core.presentation.designsystem.RunningTrackerGreen
 import com.abi.core.presentation.designsystem.RunningTrackerTheme
 import com.abi.core.presentation.designsystem.components.AppActionButton
@@ -72,12 +71,22 @@ fun RegisterScreenRoot(
                     R.string.registration_successful,
                     Toast.LENGTH_LONG
                 ).show()
+                onSuccessfulRegistration()
             }
         }
     }
     RegisterScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                RegisterAction.OnLoginClick -> {
+                    onSignInClick()
+                }
+
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 
 }
@@ -105,7 +114,7 @@ fun RegisterScreen(
                 withStyle(
                     style = SpanStyle(
                         fontFamily = Poppins,
-                        color = RunningTrackerGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
                     append(stringResource(R.string.already_have_account) + " ")
