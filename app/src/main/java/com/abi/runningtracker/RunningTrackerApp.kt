@@ -3,6 +3,7 @@ package com.abi.runningtracker
 import android.app.Application
 import com.abi.auth.data.di.authDataModule
 import com.abi.auth.presentation.di.authViewModelModule
+import com.abi.core.data.di.coreDataModule
 import com.abi.runningtracker.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,7 +25,8 @@ class RunningTrackerApp: Application() {
             modules(
                 authDataModule,
                 authViewModelModule,
-                appModule
+                appModule,
+                coreDataModule
             )
         }
     }
