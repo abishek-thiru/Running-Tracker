@@ -14,12 +14,14 @@ import com.abi.auth.presentation.register.RegisterScreenRoot
 @Composable
 fun NavigationRoot(
     navHostController: NavHostController,
+    isLoggedIn: Boolean
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = "auth"
+        startDestination = if (isLoggedIn) "run" else "auth"
     ) {
         authGraph(navHostController)
+        runGraph(navHostController)
     }
 }
 
@@ -73,6 +75,17 @@ private fun NavGraphBuilder.authGraph(navHostController: NavHostController) {
                     }
                 }
             )
+        }
+    }
+}
+
+private fun NavGraphBuilder.runGraph(navHostController: NavHostController) {
+    navigation(
+        startDestination = "run_overview",
+        route = "run"
+    ) {
+        composable("run_overview") {
+            Text(text = "Run Overview!")
         }
     }
 }
