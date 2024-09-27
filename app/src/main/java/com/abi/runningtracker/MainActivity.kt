@@ -8,13 +8,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.abi.core.presentation.designsystem.RunningTrackerTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel by viewModel<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        installSplashScreen().apply {
+            setKeepOnScreenCondition{
+                viewModel.state.isCheckingAuth
+            }
+        }
+        actionBar?.hide()
         setContent {
             RunningTrackerTheme {
                 Surface(
@@ -22,9 +33,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavigationRoot(
-                        navHostController = navController
-                    )
+                    if(!viewModel.state.isCheckingAuth) {
+                        NavigationRoot(
+                            navHostController = navController,
+                            isLoggedIn = viewModel.state.isLoggedIn
+                        )
+                    }
                 }
             }
         }
