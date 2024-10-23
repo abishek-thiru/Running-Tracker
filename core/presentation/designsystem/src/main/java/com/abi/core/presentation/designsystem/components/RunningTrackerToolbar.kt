@@ -74,7 +74,7 @@ fun RunningTrackerToolbar(
                 )
             }
         },
-        modifier = modifier,
+        modifier = modifier.padding(top = 20.dp),
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Transparent
