@@ -26,10 +26,18 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RunOverviewScreenRoot(
+    onStartRunClick: () -> Unit,
     viewModel: RunOverviewViewModel = koinViewModel()
 ) {
     RunOverviewScreen(
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                RunOverviewAction.OnStartClick -> onStartRunClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+
+        }
     )
 
 }
@@ -47,7 +55,6 @@ fun RunOverviewScreen(
     RunningTrackerScaffold(
         topAppBar = {
             RunningTrackerToolbar(
-                modifier = Modifier.padding(top = 20.dp),
                 showBackButton = false,
                 title = stringResource(R.string.running_tracker),
                 scrollBehavior = scrollBehavior,
