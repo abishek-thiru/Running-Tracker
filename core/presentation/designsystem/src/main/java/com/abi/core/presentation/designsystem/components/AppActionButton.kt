@@ -73,7 +73,7 @@ fun AppActionButton(
 fun AppOutlinedActionButton(
     text: String,
     isLoading: Boolean,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
