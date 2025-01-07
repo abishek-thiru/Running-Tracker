@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.abi.core.presentation.designsystem.RunningTrackerTheme
 import com.abi.core.presentation.designsystem.StartIcon
 import com.abi.core.presentation.designsystem.StopIcon
+import com.abi.core.presentation.designsystem.components.AppActionButton
 import com.abi.core.presentation.designsystem.components.AppOutlinedActionButton
 import com.abi.core.presentation.designsystem.components.RunningTrackerDialog
 import com.abi.core.presentation.designsystem.components.RunningTrackerFloatingActionButton
@@ -102,7 +103,7 @@ fun ActiveRunScreen(
         )
 
         if (!showLocationRationale && !showNotificationRationale) {
-             permissionLauncher.requestRunningTrackerPermission(context)
+            permissionLauncher.requestRunningTrackerPermission(context)
         }
     }
     RunningTrackerScaffold(
@@ -162,6 +163,37 @@ fun ActiveRunScreen(
 
     }
 
+    if (!state.shouldTrack && state.hasStartedRunning) {
+        RunningTrackerDialog(
+            title = stringResource(R.string.running_is_paused),
+            onDismiss = {
+                onAction(ActiveRunAction.OnResumeRunClick)
+            },
+            description = stringResource(R.string.resume_or_finish_run),
+            primaryButton = {
+                AppActionButton(
+                    text = stringResource(R.string.resume),
+                    isLoading = false,
+                    onClick = {
+                        onAction(ActiveRunAction.OnResumeRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            secondaryButton = {
+
+                AppOutlinedActionButton(
+                    text = stringResource(R.string.finish),
+                    isLoading = state.isSavingRun,
+                    onClick = {
+                        onAction(ActiveRunAction.OnFinishRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        )
+    }
+
     if (state.showLocationRationale || state.showNotificationRationale) {
         RunningTrackerDialog(
             title = stringResource(R.string.permission_required),
@@ -170,9 +202,11 @@ fun ActiveRunScreen(
                 state.showLocationRationale && state.showNotificationRationale -> {
                     stringResource(R.string.location_notification_rationale)
                 }
+
                 state.showLocationRationale -> {
                     stringResource(R.string.location_rationale)
                 }
+
                 else -> {
                     stringResource(R.string.notification_rationale)
                 }
@@ -207,6 +241,7 @@ private fun ActivityResultLauncher<Array<String>>.requestRunningTrackerPermissio
         !hasLocationPermission && !hasNotificationPermission -> {
             launch(locationPermission + notificationPermission)
         }
+
         !hasLocationPermission -> launch(locationPermission)
         !hasNotificationPermission -> launch(notificationPermission)
     }

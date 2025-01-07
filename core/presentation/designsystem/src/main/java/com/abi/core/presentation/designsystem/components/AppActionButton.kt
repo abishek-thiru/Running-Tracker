@@ -28,7 +28,7 @@ import com.abi.core.presentation.designsystem.RunningTrackerGray
 fun AppActionButton(
     text: String,
     isLoading: Boolean,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
