@@ -31,6 +31,7 @@ import com.abi.core.presentation.designsystem.components.RunningTrackerScaffold
 import com.abi.core.presentation.designsystem.components.RunningTrackerToolbar
 import com.abi.run.presentation.R
 import com.abi.run.presentation.active_run.components.RunDataCard
+import com.abi.run.presentation.active_run.maps.TrackerMap
 import com.abi.run.presentation.util.hasLocationPermission
 import com.abi.run.presentation.util.hasNotificationPermission
 import com.abi.run.presentation.util.shouldShowLocationPermissionRationale
@@ -139,6 +140,16 @@ fun ActiveRunScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.surface)
         ) {
+            TrackerMap(
+                isRunFinished = state.isRunFinished,
+                currentLocation = state.currentLocation,
+                locations = state.runData.location,
+                onSnapShot = {
+
+                },
+                modifier = Modifier.fillMaxSize()
+            )
+
             RunDataCard(
                 elapsedTime = state.elapsedTime,
                 runData = state.runData,
