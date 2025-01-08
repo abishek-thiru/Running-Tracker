@@ -33,6 +33,7 @@ import com.abi.core.presentation.designsystem.components.RunningTrackerToolbar
 import com.abi.run.presentation.R
 import com.abi.run.presentation.active_run.components.RunDataCard
 import com.abi.run.presentation.active_run.maps.TrackerMap
+import com.abi.run.presentation.active_run.service.ActiveRunService
 import com.abi.run.presentation.util.hasLocationPermission
 import com.abi.run.presentation.util.hasNotificationPermission
 import com.abi.run.presentation.util.shouldShowLocationPermissionRationale
@@ -41,10 +42,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreenRoot(
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel()
 ) {
     ActiveRunScreen(
         state = viewModel.state,
+        onServiceToggle = onServiceToggle,
         onAction = viewModel::onAction
     )
 }
@@ -53,6 +56,7 @@ fun ActiveRunScreenRoot(
 @Composable
 fun ActiveRunScreen(
     state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit
 ) {
     val context = LocalContext.current
@@ -106,6 +110,19 @@ fun ActiveRunScreen(
             permissionLauncher.requestRunningTrackerPermission(context)
         }
     }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if (state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if (context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
+        }
+    }
+
     RunningTrackerScaffold(
         withGradient = false,
         topAppBar = {
@@ -254,7 +271,8 @@ private fun ActiveRunScreenPreview() {
 
     RunningTrackerTheme {
         ActiveRunScreen(
-            state = ActiveRunState()
+            state = ActiveRunState(),
+            onServiceToggle = {}
         ) {
 
         }
