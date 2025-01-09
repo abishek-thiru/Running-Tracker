@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.runningTracker.android.application.compose)
     alias(libs.plugins.runningTracker.jvm.ktor)
-    alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
 android {
