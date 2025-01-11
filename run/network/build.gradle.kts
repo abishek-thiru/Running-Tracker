@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.bundles.koin)
+
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
 }
