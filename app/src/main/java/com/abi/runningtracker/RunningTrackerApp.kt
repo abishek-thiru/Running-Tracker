@@ -6,6 +6,7 @@ import com.abi.auth.presentation.di.authViewModelModule
 import com.abi.core.data.di.coreDataModule
 import com.abi.core.database.di.databaseModule
 import com.abi.run.location.di.locationModule
+import com.abi.run.network.di.networkModule
 import com.abi.run.presentation.di.runPresentationModule
 import com.abi.runningtracker.di.appModule
 import kotlinx.coroutines.CoroutineScope
@@ -36,7 +37,8 @@ class RunningTrackerApp: Application() {
                 coreDataModule,
                 runPresentationModule,
                 locationModule,
-                databaseModule
+                databaseModule,
+                networkModule
             )
         }
     }
