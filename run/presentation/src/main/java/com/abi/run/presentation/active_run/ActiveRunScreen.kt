@@ -2,6 +2,7 @@ package com.abi.run.presentation.active_run
 
 import android.Manifest
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,6 +40,7 @@ import com.abi.run.presentation.util.hasNotificationPermission
 import com.abi.run.presentation.util.shouldShowLocationPermissionRationale
 import com.abi.run.presentation.util.shouldShowNotificationPermissionRationale
 import org.koin.androidx.compose.koinViewModel
+import java.io.ByteArrayOutputStream
 
 @Composable
 fun ActiveRunScreenRoot(
@@ -162,8 +164,16 @@ fun ActiveRunScreen(
                 isRunFinished = state.isRunFinished,
                 currentLocation = state.currentLocation,
                 locations = state.runData.location,
-                onSnapShot = {
-
+                onSnapShot = { bmp ->
+                    val stream = ByteArrayOutputStream()
+                    stream.use {
+                        bmp.compress(
+                            Bitmap.CompressFormat.JPEG,
+                            80,
+                            it
+                        )
+                    }
+                    onAction(ActiveRunAction.OnRunProcessed(stream.toByteArray()))
                 },
                 modifier = Modifier.fillMaxSize()
             )
