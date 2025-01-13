@@ -121,6 +121,7 @@ runningTracker-android-library = { id = "runningTracker.android.library", versio
 runningTracker-android-library-compose = { id = "runningTracker.android.library.compose", version = "unspecified"}
 runningTracker-android-feature-ui = { id = "runningTracker.android.feature.ui", version = "unspecified"}
 runningTracker-android-room = { id = "runningTracker.android.room", version = "unspecified"}
+runningTracker-android-dynamic-feature = { id = "runningTracker.android.dynamic.feature", version = "unspecified"}
 runningTracker-jvm-library = { id = "runningTracker.jvm.library", version = "unspecified"}
 runningTracker-jvm-ktor = { id = "runningTracker.jvm.ktor", version = "unspecified"}
 
