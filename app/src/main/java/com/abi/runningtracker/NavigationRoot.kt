@@ -19,14 +19,18 @@ import com.abi.run.presentation.run_overview.RunOverviewScreenRoot
 @Composable
 fun NavigationRoot(
     navHostController: NavHostController,
-    isLoggedIn: Boolean
+    isLoggedIn: Boolean,
+    onAnalyticsClick: () -> Unit
 ) {
     NavHost(
         navController = navHostController,
         startDestination = if (isLoggedIn) "run" else "auth"
     ) {
         authGraph(navHostController)
-        runGraph(navHostController)
+        runGraph(
+            navHostController = navHostController,
+            onAnalyticsClick = onAnalyticsClick
+        )
     }
 }
 
@@ -84,7 +88,10 @@ private fun NavGraphBuilder.authGraph(navHostController: NavHostController) {
     }
 }
 
-private fun NavGraphBuilder.runGraph(navHostController: NavHostController) {
+private fun NavGraphBuilder.runGraph(
+    navHostController: NavHostController,
+    onAnalyticsClick: () -> Unit
+) {
     navigation(
         startDestination = "run_overview",
         route = "run"
@@ -100,7 +107,8 @@ private fun NavGraphBuilder.runGraph(navHostController: NavHostController) {
                             inclusive = true
                         }
                     }
-                }
+                },
+                onAnalyticsClick = onAnalyticsClick
             )
         }
         composable(
