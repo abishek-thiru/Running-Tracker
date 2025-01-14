@@ -1,6 +1,7 @@
 package com.abi.runningtracker
 
 import android.app.Application
+import android.content.Context
 import com.abi.auth.data.di.authDataModule
 import com.abi.auth.presentation.di.authViewModelModule
 import com.abi.core.data.di.coreDataModule
@@ -10,6 +11,7 @@ import com.abi.run.location.di.locationModule
 import com.abi.run.network.di.networkModule
 import com.abi.run.presentation.di.runPresentationModule
 import com.abi.runningtracker.di.appModule
+import com.google.android.play.core.splitcompat.SplitCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -45,5 +47,10 @@ class RunningTrackerApp: Application() {
                 runDataModule
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }

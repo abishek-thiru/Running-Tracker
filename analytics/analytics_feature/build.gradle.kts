@@ -8,6 +8,8 @@ android {
 dependencies {
     implementation(project(":app"))
 
+    implementation(libs.androidx.navigation.compose)
+
     api(project(":analytics:presentation"))
     implementation(project(":analytics:domain"))
     implementation(project(":analytics:data"))
